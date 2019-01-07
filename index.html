@@ -1,0 +1,256 @@
+<html>
+
+<head>
+
+<script src="jquery-3.3.1.js"></script>
+
+<script type="text/javascript">
+
+var sym = "X"
+var n=0
+
+var lines = [
+[],
+['b1', 'b2', 'b3'], // 1
+['b4', 'b5', 'b6'], // 2
+['b7', 'b8', 'b9'], // 3
+
+['b1', 'b4', 'b7'], // 4
+['b2', 'b5', 'b8'], // 5
+['b3', 'b6', 'b9'], // 6
+
+['b1', 'b5', 'b9'], // 7 
+['b3', 'b5', 'b7']  // 8
+]
+
+
+line_to_str = function(line)
+{
+	return $("#" + line[0]).text() + $("#" + line[1]).text() + $("#" + line[2]).text()
+}
+
+win = function(line) {
+	str = line_to_str(line)
+	
+	if(str == "XXX")
+		alert('Выиграл X')
+	if(str == "OOO")
+		alert('Выиграл O')
+}
+
+check_win = function()
+{
+	for(i = 1; i <= 8; ++i)
+	{
+		line = lines[i]
+		win(line)
+	}
+	
+	n=n+1
+	if (n==9)
+		alert("Ничья")
+}
+
+place_O = function(but)
+{
+	$("#" + but).text("O")
+	$("#" + but).prop('disabled', true)
+}
+
+go_mm = function(but) {
+
+	$("#" + but).text(sym)
+	$("#" + but).prop('disabled', true)
+
+	check_win()
+
+	if(sym=="X")
+	  sym="O"
+	else
+	  sym="X"
+ 
+}
+
+step_1 = function()
+{
+	for(i = 1; i <= 8; ++i)
+	{
+		line = lines[i]
+		str = line_to_str(line)
+		if(str=="OO ")
+		{
+			place_O(line[2])
+			return true
+		}
+		if(str=="O O")
+		{
+			place_O(line[1])
+			return true
+		}
+		if(str==" OO")
+		{
+			place_O(line[0])
+			return true
+		}
+	}
+	
+	return false
+}
+
+step_2 = function()
+{
+	for(i = 1; i <= 8; ++i)
+	{
+		line = lines[i]
+		str = line_to_str(line)
+		if(str=="XX ")
+		{
+			place_O(line[2])
+			return true
+		}
+		if(str=="X X")
+		{
+			place_O(line[1])
+			return true
+		}
+		if(str==" XX")
+		{
+			place_O(line[0])
+			return true
+		}
+	}
+	
+	return false
+}
+
+step_3 = function() 
+{
+	if($("#b5").text() == " ")	
+	{
+		place_O("b5")
+		return true
+	}
+	return false	
+	
+}
+
+step_3_5 = function()
+{
+	if(n != 3)
+		return false
+		
+	str = line_to_str(lines[7])
+	str0 = line_to_str(lines[8])
+
+	if(str=="XOX" || str0=="XOX")
+	{
+		place_O("b6")
+		return true
+	}
+	return false
+}
+
+step_4 = function()
+{
+	buts = ["b1", "b3", "b7", "b9"]
+
+	for(i = 0; i < 4; ++i)
+	{
+		but = buts[i]
+		if($("#" + but).text() == " ")	
+		{
+			place_O(but)
+			return true
+		}
+	}
+	return false
+}
+
+step_5 = function() 
+{
+	for(i = 1; i <= 9; ++i)
+	{
+		but = "b" + i
+		if($("#" + but).text() == " ")
+		{
+			$("#" + but).text("O")
+			$("#" + but).prop('disabled', true)
+			break		// Прервать перебор
+		}
+	}	
+	
+	return true
+}
+
+go1 = function(but) {
+
+	// Ход человека
+	$("#" + but).text("X")
+	$("#" + but).prop('disabled', true)
+
+	check_win()
+	
+	// Ход компьютера
+	res = step_1()
+	if(res == false)
+		res = step_2()
+	if(res == false)
+		res = step_3()
+	if(res == false)
+		res = step_3_5()
+	if(res == false)
+		res = step_4()
+	if(res == false)
+		step_5()
+	check_win()
+}
+
+</script>
+
+<meta charset="UTF-8" />
+</head>
+
+<body style="color:blue;">
+<h1>Крестики-нолики</h1>
+
+
+<table style="border: 3px dotted brown;">
+	<tr> 
+		<td>
+		<button id="b1" onclick="go1('b1')" style="width:50px;height:50px"> </button>
+		</td>  
+		<td>
+		<button id="b2" onclick="go1('b2')" style="width:50px;height:50px"> </button>
+		</td>  
+		<td>
+		<button id="b3" onclick="go1('b3')" style="width:50px;height:50px"> </button>
+		</td>                                  
+	</tr>
+	<tr> 
+		<td>
+		<button id="b4" onclick="go1('b4')" style="width:50px;height:50px"> </button>
+		</td>  
+		<td>
+		<button id="b5" onclick="go1('b5')" style="width:50px;height:50px"> </button>
+		</td>  
+		<td>
+		<button id="b6" onclick="go1('b6')" style="width:50px;height:50px"> </button>
+		</td>                                  
+	</tr>
+	<tr> 
+		<td>
+		<button id="b7" onclick="go1('b7')" style="width:50px;height:50px"> </button>
+		</td>  
+		<td>
+		<button id="b8" onclick="go1('b8')" style="width:50px;height:50px"> </button>
+		</td>  
+		<td>
+		<button id="b9" onclick="go1('b9')" style="width:50px;height:50px"> </button>
+		</td>                                  
+	</tr>
+</table>
+
+
+</body>
+
+</html>
