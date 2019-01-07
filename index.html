@@ -6,6 +6,12 @@
 
 <script type="text/javascript">
 
+$(document).ready(function() {
+  $("#X").hide();
+  $("#O").hide();
+  $("#XO").hide();
+});
+
 var sym = "X"
 var n=0
 
@@ -33,9 +39,9 @@ win = function(line) {
 	str = line_to_str(line)
 	
 	if(str == "XXX")
-		alert('Выиграл X')
+		 $("#X").slideDown()
 	if(str == "OOO")
-		alert('Выиграл O')
+		 $("#O").slideDown()
 }
 
 check_win = function()
@@ -48,7 +54,7 @@ check_win = function()
 	
 	n=n+1
 	if (n==9)
-		alert("Ничья")
+		 $("#XO").slideDown()
 }
 
 place_O = function(but)
@@ -213,7 +219,10 @@ go1 = function(but) {
 <body style="color:blue;">
 <h1>Крестики-нолики</h1>
 
-
+ 
+<h2 style="color:orange;">Слынько София, 2А</h2>
+<h2 style="color:orange;">Слынько Ярослав, 4Б</h2>
+<h4 style="color:green;">АКЛ №13, г. Химки</h4>
 <table style="border: 3px dotted brown;">
 	<tr> 
 		<td>
@@ -249,8 +258,9 @@ go1 = function(but) {
 		</td>                                  
 	</tr>
 </table>
-
-
+<h4 id="X" style="color:green;">Выиграл X</h4> 
+<h4 id="O" style="color:red;">Выиграл O</h4>
+<h4 id="XO" style="color:black;">Ничья</h4>
 </body>
 
 </html>
