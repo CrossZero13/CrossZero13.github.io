@@ -39,9 +39,21 @@ win = function(line) {
 	str = line_to_str(line)
 	
 	if(str == "XXX")
-		 $("#X").slideDown()
+	{
+		$("#X").slideDown()
+		for(i = 1; i <= 9; ++i)
+		{
+			$("#b" + i).prop('disabled', true)
+		}	
+	}
 	if(str == "OOO")
-		 $("#O").slideDown()
+	{
+		$("#O").slideDown()
+		for(i = 1; i <= 9; ++i)
+		{
+			$("#b" + i).prop('disabled', true)
+		}	
+	}
 }
 
 check_win = function()
@@ -226,41 +238,41 @@ go1 = function(but) {
 <table style="border: 3px dotted brown;">
 	<tr> 
 		<td>
-		<button id="b1" onclick="go1('b1')" style="width:50px;height:50px"> </button>
+		<button id="b1" onclick="go1('b1')" style="width:100px;height:100px; font-size: 50pt;"> </button>
 		</td>  
 		<td>
-		<button id="b2" onclick="go1('b2')" style="width:50px;height:50px"> </button>
+		<button id="b2" onclick="go1('b2')" style="width:100px;height:100px; font-size: 50pt;"> </button>
 		</td>  
 		<td>
-		<button id="b3" onclick="go1('b3')" style="width:50px;height:50px"> </button>
+		<button id="b3" onclick="go1('b3')" style="width:100px;height:100px; font-size: 50pt;"> </button>
 		</td>                                  
 	</tr>
 	<tr> 
 		<td>
-		<button id="b4" onclick="go1('b4')" style="width:50px;height:50px"> </button>
+		<button id="b4" onclick="go1('b4')" style="width:100px;height:100px; font-size: 50pt;"> </button>
 		</td>  
 		<td>
-		<button id="b5" onclick="go1('b5')" style="width:50px;height:50px"> </button>
+		<button id="b5" onclick="go1('b5')" style="width:100px;height:100px; font-size: 50pt;"> </button>
 		</td>  
 		<td>
-		<button id="b6" onclick="go1('b6')" style="width:50px;height:50px"> </button>
+		<button id="b6" onclick="go1('b6')" style="width:100px;height:100px; font-size: 50pt;"> </button>
 		</td>                                  
 	</tr>
 	<tr> 
 		<td>
-		<button id="b7" onclick="go1('b7')" style="width:50px;height:50px"> </button>
+		<button id="b7" onclick="go1('b7')" style="width:100px;height:100px; font-size: 50pt;"> </button>
 		</td>  
 		<td>
-		<button id="b8" onclick="go1('b8')" style="width:50px;height:50px"> </button>
+		<button id="b8" onclick="go1('b8')" style="width:100px;height:100px; font-size: 50pt;"> </button>
 		</td>  
 		<td>
-		<button id="b9" onclick="go1('b9')" style="width:50px;height:50px"> </button>
+		<button id="b9" onclick="go1('b9')" style="width:100px;height:100px; font-size: 50pt;"> </button>
 		</td>                                  
 	</tr>
 </table>
-<h4 id="X" style="color:green;">Выиграл X</h4> 
-<h4 id="O" style="color:red;">Выиграл O</h4>
-<h4 id="XO" style="color:black;">Ничья</h4>
+<h1 id="X" style="color:green;">Выиграл X</h1> 
+<h1 id="O" style="color:red;">Выиграл O</h1>
+<h1 id="XO" style="color:black;">Ничья</h1>
 </body>
 
 </html>
