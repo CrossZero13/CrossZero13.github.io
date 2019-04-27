@@ -73,7 +73,18 @@ line_to_str = function(line)
 	return $("#" + line[0]).text() + $("#" + line[1]).text() + $("#" + line[2]).text()
 }
 
-win = function(line) {
+higlight = function(n)
+{
+	line = lines[n]
+	for(var i = 0; i < 3; ++i)
+	{
+		$("#" + line[i]).css('color', 'red')
+		$("#" + line[i]).css('text-weight', 'bold')
+	}
+}
+
+win = function(n) {
+	line = lines[n]
 	str = line_to_str(line)
 	
 	if(str == "XXX")
@@ -83,6 +94,7 @@ win = function(line) {
 		{
 			$("#b" + i).prop('disabled', true)
 		}	
+		higlight(n)
 		return true
 	}
 	if(str == "OOO")
@@ -92,6 +104,7 @@ win = function(line) {
 		{
 			$("#b" + i).prop('disabled', true)
 		}	
+		higlight(n)
 		return true
 	}
 }
@@ -101,7 +114,7 @@ check_win = function()
 	for(i = 1; i <= 8; ++i)
 	{
 		line = lines[i]
-		if(win(line))
+		if(win(i))
 			return
 	}
 	
